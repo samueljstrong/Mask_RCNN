@@ -12,9 +12,9 @@ Written by Waleed Abdulla
 import os
 import sys
 import math
-import random
 import numpy as np
 import cv2
+import secrets
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -155,15 +155,15 @@ class ShapesDataset(utils.Dataset):
                             and location. Differs per shape type.
         """
         # Shape
-        shape = random.choice(["square", "circle", "triangle"])
+        shape = secrets.SystemRandom().choice(["square", "circle", "triangle"])
         # Color
-        color = tuple([random.randint(0, 255) for _ in range(3)])
+        color = tuple([secrets.SystemRandom().randint(0, 255) for _ in range(3)])
         # Center x, y
         buffer = 20
-        y = random.randint(buffer, height - buffer - 1)
-        x = random.randint(buffer, width - buffer - 1)
+        y = secrets.SystemRandom().randint(buffer, height - buffer - 1)
+        x = secrets.SystemRandom().randint(buffer, width - buffer - 1)
         # Size
-        s = random.randint(buffer, height // 4)
+        s = secrets.SystemRandom().randint(buffer, height // 4)
         return shape, color, (x, y, s)
 
     def random_image(self, height, width):
@@ -172,12 +172,12 @@ class ShapesDataset(utils.Dataset):
         specifications that can be used to draw the image.
         """
         # Pick random background color
-        bg_color = np.array([random.randint(0, 255) for _ in range(3)])
+        bg_color = np.array([secrets.SystemRandom().randint(0, 255) for _ in range(3)])
         # Generate a few random shapes and record their
         # bounding boxes
         shapes = []
         boxes = []
-        N = random.randint(1, 4)
+        N = secrets.SystemRandom().randint(1, 4)
         for _ in range(N):
             shape, color, dims = self.random_shape(height, width)
             shapes.append((shape, color, dims))
