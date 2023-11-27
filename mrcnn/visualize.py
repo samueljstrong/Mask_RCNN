@@ -9,7 +9,6 @@ Written by Waleed Abdulla
 
 import os
 import sys
-import random
 import itertools
 import colorsys
 
@@ -19,6 +18,7 @@ import matplotlib.pyplot as plt
 from matplotlib import patches,  lines
 from matplotlib.patches import Polygon
 import IPython.display
+import secrets
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../")
@@ -65,7 +65,7 @@ def random_colors(N, bright=True):
     brightness = 1.0 if bright else 0.7
     hsv = [(i / N, 1, brightness) for i in range(N)]
     colors = list(map(lambda c: colorsys.hsv_to_rgb(*c), hsv))
-    random.shuffle(colors)
+    secrets.SystemRandom().shuffle(colors)
     return colors
 
 
