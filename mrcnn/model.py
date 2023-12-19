@@ -2641,8 +2641,7 @@ class MaskRCNN():
             if bool(re.fullmatch(name, p.name)):
                 return p
             checked.append(p)
-            a = self.ancestor(p, name, checked)
-            if a is not None:
+            if (a := self.ancestor(p, name, checked)) is not None:
                 return a
         return None
 

@@ -394,8 +394,7 @@ def draw_boxes(image, boxes=None, refined_boxes=None,
     masked_image = image.astype(np.uint32).copy()
     for i in range(N):
         # Box visibility
-        visibility = visibilities[i] if visibilities is not None else 1
-        if visibility == 0:
+        if (visibility := visibilities[i] if visibilities is not None else 1) == 0:
             color = "gray"
             style = "dotted"
             alpha = 0.5
